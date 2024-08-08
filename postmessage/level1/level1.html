@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostMessage XSS Lab - Victim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>PostMessage XSS Lab - Victim</h1>
+        <p>Received message:</p>
+        <div id="receivedMessage" class="alert alert-info"></div>
+    </div>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            // UNSAFE: Directly injecting received message into the DOM
+             document.getElementById('receivedMessage').innerHTML = event.data;
+            //eval(event.data);
+        });
+    </script>
+</body>
+</html>

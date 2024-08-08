@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Labs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .lab-type {
+            position: relative;
+            display: inline-block;
+            margin: 15px;
+        }
+        .lab-type:hover .challenge-levels {
+            display: block;
+        }
+        .challenge-levels {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 1;
+        }
+        .challenge-levels button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">ZomaSec Client-Side Labs</h1>
+        <p class="text-center">Explore various security challenges by selecting a lab type below.</p>
+
+        <div class="d-flex justify-content-center flex-wrap mt-4">
+            <!-- XSS Lab -->
+            <div class="lab-type">
+                <button class="btn btn-warning">DOM XSS Lab</button>
+                <div class="challenge-levels">
+                    <button class="btn btn-outline-secondary" data-lab="xss" data-level="1">Level 1</button>
+                    <button class="btn btn-outline-secondary" data-lab="xss" data-level="2">Level 2</button>
+                    <button class="btn btn-outline-secondary" data-lab="xss" data-level="3">Level 3</button>
+                    <button class="btn btn-outline-secondary" data-lab="xss" data-level="4">Level 4</button>
+                </div>
+            </div>
+
+            <!-- PostMessage Lab -->
+            <div class="lab-type">
+                <button class="btn btn-primary">PostMessage Lab</button>
+                <div class="challenge-levels">
+                    <button class="btn btn-outline-secondary" data-lab="postmessage" data-level="1">Level 1</button>
+                    <!-- <button class="btn btn-outline-secondary" data-lab="postmessage" data-level="2">Level 2</button>
+                    <button class="btn btn-outline-secondary" data-lab="postmessage" data-level="3">Level 3</button>
+                    <button class="btn btn-outline-secondary" data-lab="postmessage" data-level="4">Level 4</button> -->
+                </div>
+            </div>
+
+           
+
+            <!-- WAF Lab -->
+            <!-- <div class="lab-type">
+                <button class="btn btn-danger">WAF Lab</button>
+                <div class="challenge-levels">
+                    <button class="btn btn-outline-secondary" data-lab="waf" data-level="1">Level 1</button>
+                    <button class="btn btn-outline-secondary" data-lab="waf" data-level="2">Level 2</button>
+                    <button class="btn btn-outline-secondary" data-lab="waf" data-level="3">Level 3</button>
+                    <button class="btn btn-outline-secondary" data-lab="waf" data-level="4">Level 4</button>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.challenge-levels button').forEach((button) => {
+            button.addEventListener('click', () => {
+                const labType = button.getAttribute('data-lab');
+                const level = button.getAttribute('data-level');
+                const url = `./${labType}/level${level}.html`;
+                window.open(url, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

