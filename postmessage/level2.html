@@ -16,8 +16,14 @@
     <script>
         window.addEventListener('message', function(event) {
             // UNSAFE: Directly injecting received message into the DOM
+
+            if (event.data.indexOf('http:') == -1 ) {
+                alert('Unsafe message received: ' + event.data);
+                return;
+            } 
+
              document.getElementById('receivedMessage').innerHTML = event.data;
-            //eval(event.data);
+            
         });
     </script>
 </body>
